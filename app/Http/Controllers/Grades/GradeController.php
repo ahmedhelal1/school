@@ -4,9 +4,10 @@
 namespace App\Http\Controllers\Grades;
 
 use App\Http\Controllers\Controller;
-
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreGradesRequest;
+
 
 class GradeController extends Controller
 {
@@ -30,9 +31,13 @@ class GradeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGradesRequest $request)
     {
-        //
+
+        $grade = new Grade();
+        $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
+        $grade->notes = $request->Notes;
+        $grade->save();
     }
 
     /**
