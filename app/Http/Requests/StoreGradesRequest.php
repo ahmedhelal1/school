@@ -22,7 +22,7 @@ class StoreGradesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'required|unique:grades|max:255'
+            'Name' => 'required|unique:grades|max:255'
         ];
     }
     public function messages(): array

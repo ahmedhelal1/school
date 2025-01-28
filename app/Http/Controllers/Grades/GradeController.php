@@ -38,6 +38,10 @@ class GradeController extends Controller
         $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
         $grade->notes = $request->Notes;
         $grade->save();
+
+        toastr()->success(trans('message.add_success'));
+
+        return redirect()->route('Grades.index');
     }
 
     /**

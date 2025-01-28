@@ -65,7 +65,7 @@
                                     <?php $i++; ?>
                                     <td>{{ $i }}</td>
                                     <td>{{ $Grade->name }}</td>
-                                    <td>{{ $Grade->Notes }}</td>
+                                    <td>{{ $Grade->notes }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#edit{{ $Grade->id }}"

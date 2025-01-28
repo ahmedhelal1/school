@@ -22,5 +22,7 @@ return [
     'exists' => 'This field already exists',
     'Delete' => 'Delete',
     'Close' => 'Close',
+    'add_success' => ' Add success',
+
 
 ];
