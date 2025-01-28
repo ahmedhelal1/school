@@ -3,6 +3,8 @@
 return [
 
     'title_page' => 'Grades',
+    'home' => 'home',
+
     'List_Grade' => 'List_Grade',
     'add_Grade' => 'Add Grade',
     'edit_Grade' => 'edit_Grade',
