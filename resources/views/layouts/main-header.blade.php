@@ -112,18 +112,30 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
+
                     </div>
                 </li>
-                <ul>
-                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <li>
-                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                <div class="btn-group mb-1">
+                    <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        @if (App::getLocale() == 'ar')
+                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                            <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
+                        @else
+                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                            <img src="{{ URL::asset('assets/images/flags/US.png') }}" alt="">
+                        @endif
+                    </button>
+                    <div class="dropdown-menu">
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
                                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                 {{ $properties['native'] }}
                             </a>
-                        </li>
-                    @endforeach
-                </ul>
+                        @endforeach
+                    </div>
+                </div>
+
             </ul>
         </nav>
 

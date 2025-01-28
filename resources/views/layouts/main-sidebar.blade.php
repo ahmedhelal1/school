@@ -28,31 +28,15 @@
                     <!-- menu item Elements-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
-                            <div class="pull-left"><i class="ti-palette"></i><span
-                                    class="right-nav-text">Elements</span></div>
+                            <div class="pull-left"><i class="ti-palette"></i><span class="right-nav-text">
+                                    {{ trans('main_transition.Grades') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="accordions.html">Accordions</a></li>
-                            <li><a href="alerts.html">Alerts</a></li>
-                            <li><a href="button.html">Button</a></li>
-                            <li><a href="colorpicker.html">Colorpicker</a></li>
-                            <li><a href="dropdown.html">Dropdown</a></li>
-                            <li><a href="lists.html">lists</a></li>
-                            <li><a href="modal.html">modal</a></li>
-                            <li><a href="nav.html">nav</a></li>
-                            <li><a href="nicescroll.html">nicescroll</a></li>
-                            <li><a href="pricing-table.html">pricing table</a></li>
-                            <li><a href="ratings.html">ratings</a></li>
-                            <li><a href="date-picker.html">date picker</a></li>
-                            <li><a href="tabs.html">tabs</a></li>
-                            <li><a href="typography.html">typography</a></li>
-                            <li><a href="popover-tooltips.html">Popover tooltips</a></li>
-                            <li><a href="progress.html">progress</a></li>
-                            <li><a href="switch.html">switch</a></li>
-                            <li><a href="sweetalert2.html">sweetalert2</a></li>
-                            <li><a href="touchspin.html">touchspin</a></li>
+                            <li><a href="{{ route('Grades.index') }}">{{ trans('main_transition.Grades_list') }}</a>
+                            </li>
+
                         </ul>
                     </li>
                     <!-- menu item calendar-->
@@ -116,8 +100,7 @@
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Widgets, Forms & Tables </li>
                     <!-- menu item Widgets-->
                     <li>
-                        <a href="widgets.html"><i class="ti-blackboard"></i><span
-                                class="right-nav-text">Widgets</span>
+                        <a href="widgets.html"><i class="ti-blackboard"></i><span class="right-nav-text">Widgets</span>
                             <span class="badge badge-pill badge-danger float-right mt-1">59</span> </a>
                     </li>
                     <!-- menu item Form-->
