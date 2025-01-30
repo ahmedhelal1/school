@@ -14,4 +14,9 @@ class Grade extends Model
 
     use HasFactory;
     protected $fillable = ['name', 'notes'];
+
+    public function ClassRoom()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
 }
