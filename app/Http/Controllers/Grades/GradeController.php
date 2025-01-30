@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGradesRequest;
-
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class GradeController extends Controller
 {
@@ -84,8 +84,15 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Grade $grade)
+    public function destroy(Request $grade)
     {
-        //
+        try {
+            $grade = Grade::findOrFail($grade->id);
+            $grade->delete($grade->id);
+            toastr()->success(trans('message.delete_success'));
+            return redirect()->route('Grades.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }
