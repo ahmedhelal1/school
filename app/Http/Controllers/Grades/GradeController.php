@@ -34,14 +34,17 @@ class GradeController extends Controller
     public function store(StoreGradesRequest $request)
     {
 
-        $grade = new Grade();
-        $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
-        $grade->notes = $request->Notes;
-        $grade->save();
+        try {
+            $grade = new Grade();
+            $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
+            $grade->notes = $request->Notes;
+            $grade->save();
 
-        toastr()->success(trans('message.add_success'));
-
-        return redirect()->route('Grades.index');
+            toastr()->success(trans('message.add_success'));
+            return redirect()->route('Grades.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -63,9 +66,19 @@ class GradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Grade $grade)
+    public function update(storeGradesRequest $request)
     {
-        //
+        try {
+            $grade = Grade::findOrFail($request->id);
+            $grade->update([
+                'name' => ['en' => $request->Name_en, 'ar' => $request->Name],
+                'notes' => $request->Notes,
+            ]);
+            toastr()->success(trans('message.edit_success'));
+            return redirect()->route('Grades.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
