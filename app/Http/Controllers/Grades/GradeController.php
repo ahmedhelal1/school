@@ -33,19 +33,23 @@ class GradeController extends Controller
      */
     public function store(StoreGradesRequest $request)
     {
+        if (Grade::where('name->en', $request->Name_en)->orWhere('name->ar', $request->Name)->exists()) {
+            return redirect()->back()->withErrors(trans('Grades_trans.exists'));
+        } else {
+            try {
+                $grade = new Grade();
+                $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
+                $grade->notes = $request->Notes;
+                $grade->save();
 
-        try {
-            $grade = new Grade();
-            $grade->name = ['en' => $request->Name_en, 'ar' => $request->Name];
-            $grade->notes = $request->Notes;
-            $grade->save();
-
-            toastr()->success(trans('message.add_success'));
-            return redirect()->route('Grades.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+                toastr()->success(trans('message.add_success'));
+                return redirect()->route('Grades.index');
+            } catch (\Exception $e) {
+                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            }
         }
     }
+
 
     /**
      * Display the specified resource.
