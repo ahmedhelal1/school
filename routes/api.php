@@ -11,3 +11,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/Grades', [GradeController::class, 'index']);
+Route::get('/Grades/{id}', [GradeController::class, 'show']);
