@@ -8,15 +8,13 @@ use App\Services\GradeService;
 use Illuminate\Http\Request;
 use App\Models\Grade;
 
+use Illuminate\Support\Facades\Validator;
+
 class GradeController extends Controller
 {
 
     use ApiResponseTrait;
-    protected $gradeService;
-    public function __construct(GradeService $gradeService)
-    {
-        $this->gradeService = $gradeService;
-    }
+
     public function index()
     {
         // $grades = Grade::all();
@@ -27,18 +25,50 @@ class GradeController extends Controller
     /////////////////////////////////
     public function show($id)
     {
-        // $grade = Grade::Find($id);
+
+
+        // $grade = new GradeResource(Grade::findOrFail($id));
+        // return $grade;
         //or
-        $grade = new GradeResource(Grade::findOrFail($id));
+        $grade = Grade::Find($id);
+        if ($grade) {
+            return $this->api_response(new GradeResource(Grade::findOrFail($id), 200, "OK"));
+        } else {
+            return $this->api_response(null, 401, "not found");
+        }
+    }
+    public function store(Request $request)
+    {
 
-        return $grade;
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'notes' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->api_response(null, 400, $validator->errors());
+        }
 
-        // if ($grade) {
-        //     return $this->api_response($grade, 200, "OK");
-        // } else {
-        //     return $this->api_response(null, 401, "not found");
-        // }
-
-
+        $grade = Grade::create($request->all());
+        if ($grade) {
+            return $this->api_response(new GradeResource($grade), 201, "create successfully");
+        } else {
+            return $this->api_response(null, 400, "create failed");
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'notes' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->api_response(null, 400, $validator->errors());
+        }
+        $grade = Grade::Find($id);
+        if (!$grade) {
+            return $this->api_response(null, 404, "not found");
+        }
+        $grade->update($request->all());
+        return $this->api_response(new GradeResource($grade), 200, "update successfully");
     }
 }

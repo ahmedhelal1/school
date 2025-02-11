@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\GradeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\New_GradeController;
 
 
 
@@ -11,4 +12,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/Grades', [GradeController::class, 'index']);
-Route::get('/Grades/{id}', [GradeController::class, 'show']);
+Route::get('/Grade/{id}', [GradeController::class, 'show']);
+Route::post('/Grade', [GradeController::class, 'store']);
+Route::post('/Grade/{id}', [GradeController::class, "update"]);
+
+
+
+
+
+
+////////////
+
+Route::get('/NewGrades', [New_GradeController::class, 'index']);
+Route::get('/NewGrades/{id}', [New_GradeController::class, 'show']);
