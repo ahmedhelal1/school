@@ -71,4 +71,15 @@ class GradeController extends Controller
         $grade->update($request->all());
         return $this->api_response(new GradeResource($grade), 200, "update successfully");
     }
+    public function destroy($id)
+    {
+        $grade = Grade::Find($id);
+        if (!$grade) {
+            return $this->api_response(null, 404, "not found");
+        }
+        $grade->delete();
+        if ($grade) {
+            return $this->api_response(null, 200, "delete successfully");
+        }
+    }
 }

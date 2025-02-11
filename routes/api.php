@@ -15,6 +15,7 @@ Route::get('/Grades', [GradeController::class, 'index']);
 Route::get('/Grade/{id}', [GradeController::class, 'show']);
 Route::post('/Grade', [GradeController::class, 'store']);
 Route::post('/Grade/{id}', [GradeController::class, "update"]);
+Route::post('/Grades/{id}', [GradeController::class, "destroy"]);
 
 
 
